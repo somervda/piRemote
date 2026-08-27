@@ -20,6 +20,9 @@ sudo apt install samba samba-common-bin -y
 ```
 Edit the samba config file, add the following text at the end
 ```
+sudo nano /etc/samba/smb.conf
+```
+```
 [PiShare]
 path = /home/pi
 writeable = yes
