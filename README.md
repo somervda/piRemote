@@ -100,6 +100,8 @@ sudo systemctl start pigpiod.service
 Add this line to \boot\firmware\config.txt to set the gpio pin 22 to output and a low value. This insures the IR LED is turned off when the RPI starts up.
 ```
 sudo nano /boot/firmware/config.txt
+```
+```
 gpio=22=op,dl
 ```
 ### Bluetooth ###
