@@ -38,7 +38,7 @@ Restart the samba service
 ```
 sudo systemctl restart smbd
 ```
-### CEC Libraries###
+### CEC Libraries ###
 
 This sets up a CLI client to work with CEC and a python interface to CEC
 
