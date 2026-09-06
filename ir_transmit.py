@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ir_transmit.py – Parse a keys.ir file (LIRC raw format) and transmit
+ir_transmit.py – Parse a fios.ir file (LIRC raw format) and transmit
 a named IR signal on a Raspberry Pi GPIO pin using pigpio hardware waves.
 
 Use as a standalone script:
@@ -11,16 +11,16 @@ Or import it into other programs:
 
     # Context-manager form (recommended – cleans up pigpio automatically):
     with IRTransmitter(gpio_pin=22) as ir:
-        ir.load_keys("keys.ir")
+        ir.load_keys("fios.ir")
         ir.send("1", repeat=5)
 
     # Or manage the lifecycle yourself:
     ir = IRTransmitter(gpio_pin=17, carrier_hz=38000.0)
-    ir.load_keys("keys.ir")
+    ir.load_keys("fios.ir")
     ir.send("2")
     ir.disconnect()
 
-IR signal format (keys.ir) – LIRC raw timings in microseconds:
+IR signal format (fios.ir) – LIRC raw timings in microseconds:
     <space> <mark> <space> <mark> <space> ...
     where space = LED off, mark = LED on (38 kHz carrier modulated on GPIO)
 """
@@ -37,7 +37,7 @@ import pigpio
 # ──────────────────────────────────────────────
 
 class IRTransmitter:
-    """Parse a keys.ir (LIRC raw) file and transmit named IR signals on a
+    """Parse a fios.ir (LIRC raw) file and transmit named IR signals on a
     Raspberry Pi GPIO pin using pigpio's DMA waveform engine.
 
     Args:
@@ -234,11 +234,11 @@ class IRTransmitter:
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
-        description="Transmit an IR signal from keys.ir on GPIO pin 22."
+        description="Transmit an IR signal from fios.ir on GPIO pin 22."
     )
     parser.add_argument("key", help="Name of the key to transmit (e.g. '1', '2', '3')")
-    parser.add_argument("--file", "-f", default="keys.ir",
-                        help="Path to the .ir file (default: keys.ir)")
+    parser.add_argument("--file", "-f", default="fios.ir",
+                        help="Path to the .ir file (default: fios.ir)")
     parser.add_argument("--pin", "-p", type=int, default=22,
                         help="GPIO BCM pin number (default: 22)")
     parser.add_argument("--repeat", "-r", type=int, default=1,
